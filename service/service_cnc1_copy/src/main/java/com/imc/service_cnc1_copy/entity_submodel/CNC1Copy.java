@@ -1,9 +1,9 @@
-package com.imc.service_cnc1_copy.controller.entity_submodel;
+package com.imc.service_cnc1_copy.entity_submodel;
 
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.Buttons;
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.CNC1Copy_Status;
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.Conveyor;
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.RawColor;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.Buttons;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.CNC1Copy_Status;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.Conveyor;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.RawColor;
 import com.imc.siemens_aas.opcua.OpcUaClientService;
 import lombok.Data;
 import org.springframework.beans.factory.InitializingBean;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CNC1Copy implements InitializingBean{
 
-    private static OpcUaClientService uaClientService;
+    public static OpcUaClientService uaClientService;
 
     @Autowired
     private OpcUaClientService clientService;

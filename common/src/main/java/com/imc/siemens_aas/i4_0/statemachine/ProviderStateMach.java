@@ -36,7 +36,7 @@ public class ProviderStateMach {
             if (isKnown) {
                 boolean isOk = new ServiceJudge(this.aasEnv, interactionElements).setJudgeStrategy(judgeStrategy).isOK();
                 if (isOk) {
-                    this.aasEnv.doServic(interactionElements);
+                    this.aasEnv.doService(interactionElements);
                     resFrame.setType(MessageType.Offer);
                 } else {
                     resFrame.setType(MessageType.Refusal);

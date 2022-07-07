@@ -12,7 +12,9 @@ import java.util.HashMap;
 
 public class SubmodelFactory {
 
-    //用来管理submodel和对应的url
+    /**
+     * 用来管理submodel和对应的url
+     */
     private HashMap<Submodel, String> ricUrls = new HashMap<>();
 
     /**
@@ -77,7 +79,8 @@ public class SubmodelFactory {
         if (typeName.equals("Operation")) {
             //inputVariable
             JsonNode inputVariable = submodelElement.path("inputVariable");
-            if (!inputVariable.isEmpty()) {//如果inputVariable中有数据
+            //如果inputVariable中有数据
+            if (!inputVariable.isEmpty()) {
                 for (JsonNode jsonNode : inputVariable) {
                     JsonNode elementNode = jsonNode.path("value").path("submodelElement");
                     JsonNode elementType = elementNode.path("modelType").path("name");
@@ -86,7 +89,8 @@ public class SubmodelFactory {
             }
             //outputVariable
             JsonNode outputVariable = submodelElement.path("outputVariable");
-            if (!outputVariable.isEmpty()) {//如果outputVariable中有数据
+            //如果outputVariable中有数据
+            if (!outputVariable.isEmpty()) {
                 for (JsonNode jsonNode : outputVariable) {
                     JsonNode elementNode = jsonNode.path("value").path("submodelElement");
                     JsonNode elementType = elementNode.path("modelType").path("name");
@@ -95,7 +99,8 @@ public class SubmodelFactory {
             }
             //inoutputVariable
             JsonNode inoutputVariable = submodelElement.path("inoutputVariable");
-            if (!inoutputVariable.isEmpty()) {//如果inoutputVariable中有数据
+            //如果inoutputVariable中有数据
+            if (!inoutputVariable.isEmpty()) {
                 for (JsonNode jsonNode : inoutputVariable) {
                     JsonNode elementNode = jsonNode.path("value").path("submodelElement");
                     JsonNode elementType = elementNode.path("modelType").path("name");

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class AS_Service extends ModelObject {
 
-    protected Short AS_mode;
+    public Short AS_mode;
 
     public static void AS_AssembleStrategy(short mode) {
         AS.setAssembleStrategy(mode);

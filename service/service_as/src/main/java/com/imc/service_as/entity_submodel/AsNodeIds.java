@@ -66,13 +66,15 @@ public class AsNodeIds {
     }
 
     //AS控制节点
-    protected static NodeId AS_mode;
-    protected static NodeId InitialFlag;
-    protected static NodeId StartFlag;
+    public static NodeId AS_mode;
+    public static NodeId InitialFlag;
+    public static NodeId StartFlag;
+    public static NodeId StopFlag;
     static {
         AS_mode = new NodeId(nameSpace, "\"ServiceParameter\".\"AS_mode\"");
         InitialFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"initialFlag\"");
         StartFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"startFlag\"");
+        StopFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"stopFlag\"");
     }
 
     //AS状态节点

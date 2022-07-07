@@ -5,7 +5,7 @@ import lombok.Data;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 
 @Data
-public class Cnc2NodeIds {
+public class CNC2NodeIds {
     private static Integer nameSpace;
     static {
         nameSpace = OpcUaProperties.NAMESPACE;
@@ -49,11 +49,12 @@ public class Cnc2NodeIds {
     }
 
 
-    protected static NodeId CNC2_rawColor;
-    protected static NodeId CNC2_type;
-    protected static NodeId CNC2_faultSimulation;
-    protected static NodeId initialFlag;
-    protected static NodeId startFlag;
+    public static NodeId CNC2_rawColor;
+    public static NodeId CNC2_type;
+    public static NodeId CNC2_faultSimulation;
+    public static NodeId initialFlag;
+    public static NodeId startFlag;
+    public static NodeId stopFlag;
     //初始化
     static {
         CNC2_rawColor = new NodeId(nameSpace, "\"ServiceParameter\".\"CNC2_rawcolor\"");
@@ -61,6 +62,7 @@ public class Cnc2NodeIds {
         CNC2_faultSimulation = new NodeId(nameSpace, "\"ServiceParameter\".\"CNC2_faultSimulation\"");
         initialFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"initialFlag\"");
         startFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"startFlag\"");
+        stopFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"stopFlag\"");
     }
 
 

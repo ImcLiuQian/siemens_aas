@@ -1,4 +1,4 @@
-package com.imc.service_cnc1_copy.controller.entity_submodel;
+package com.imc.service_cnc1_copy.entity_submodel;
 
 import com.imc.siemens_aas.opcua.OpcUaProperties;
 import lombok.Data;
@@ -48,11 +48,12 @@ public class CNC1CopyNodeIds {
         grey = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"rawColor\".\"grey\"");
     }
 
-    protected static NodeId CNC1Copy_rawColor;
-    protected static NodeId CNC1Copy_type;
-    protected static NodeId CNC1Copy_faultSimulation;
-    protected static NodeId initialFlag;
-    protected static NodeId startFlag;
+    public static NodeId CNC1Copy_rawColor;
+    public static NodeId CNC1Copy_type;
+    public static NodeId CNC1Copy_faultSimulation;
+    public static NodeId initialFlag;
+    public static NodeId startFlag;
+    public static NodeId stopFlag;
     //初始化
     static {
         CNC1Copy_rawColor = new NodeId(nameSpace, "\"ServiceParameter\".\"CNC1_rawColor\"");
@@ -60,6 +61,7 @@ public class CNC1CopyNodeIds {
         CNC1Copy_faultSimulation = new NodeId(nameSpace, "\"ServiceParameter\".\"CNC1_copy_faultSimulation\"");
         initialFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"initialFlag\"");
         startFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"startFlag\"");
+        stopFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"stopFlag\"");
     }
 
 

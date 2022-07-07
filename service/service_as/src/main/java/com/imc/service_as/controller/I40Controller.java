@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class I40Controller {
 
-    @Autowired
-    private ProviderStateMach providerStateMach;
+//    @Autowired
+//    private ProviderStateMach providerStateMach;
 
     @PostMapping
     public ResponseEntity recvMessage(Message message) {
-        String res = providerStateMach.handle(message);
-        return ResponseEntity.ok(res);
+//        String res = providerStateMach.handle(message);
+        return ResponseEntity.ok("");
+//        return ResponseEntity.ok(res);
     }
 }

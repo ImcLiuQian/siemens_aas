@@ -1,8 +1,8 @@
 package com.imc.service_cnc1_copy;
 
-import com.imc.service_cnc1_copy.controller.entity_submodel.CNC1Copy;
-import com.imc.service_cnc1_copy.controller.entity_submodel.CNC1Copy_Instance_FactoryIO;
-import com.imc.service_cnc1_copy.controller.entity_submodel.CNC1Copy_Service;
+import com.imc.service_cnc1_copy.entity_submodel.CNC1Copy;
+import com.imc.service_cnc1_copy.entity_submodel.CNC1Copy_Instance_FactoryIO;
+import com.imc.service_cnc1_copy.entity_submodel.CNC1Copy_Service;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

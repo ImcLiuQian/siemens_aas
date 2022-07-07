@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AS implements InitializingBean {
 
-    private static OpcUaClientService uaClientService;
+    public static OpcUaClientService uaClientService;
 
     @Autowired
     private OpcUaClientService clientService;

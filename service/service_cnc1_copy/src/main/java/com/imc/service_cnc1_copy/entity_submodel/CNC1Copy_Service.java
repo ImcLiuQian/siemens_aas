@@ -1,6 +1,6 @@
-package com.imc.service_cnc1_copy.controller.entity_submodel;
+package com.imc.service_cnc1_copy.entity_submodel;
 
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.CNC1Copy_Status;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.CNC1Copy_Status;
 import lombok.Data;
 
 @Data

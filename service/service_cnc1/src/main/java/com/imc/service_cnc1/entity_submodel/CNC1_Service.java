@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 public class CNC1_Service {
 
-    protected Short CNC1_rawColor;
-    protected Boolean CNC1_type;
-    protected Boolean CNC1_faultSimulation;
+    public Short CNC1_rawColor;
+    public Boolean CNC1_type;
+    public Boolean CNC1_faultSimulation;
 
     public static void CNC1_ChooseProduct(Short color, Boolean type) {
         CNC1.setProduct(color, type);

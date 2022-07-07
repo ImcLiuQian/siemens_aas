@@ -1,8 +1,8 @@
-package com.imc.service_cnc1_copy.controller.entity_submodel;
+package com.imc.service_cnc1_copy.entity_submodel;
 
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.Buttons;
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.Conveyor;
-import com.imc.service_cnc1_copy.controller.entity_submodel.metacnc1_copy.RawColor;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.Buttons;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.Conveyor;
+import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.RawColor;
 import lombok.Data;
 
 @Data
