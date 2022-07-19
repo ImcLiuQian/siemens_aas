@@ -25,7 +25,7 @@ public class CNC1BackUpController {
     }
 
     @PutMapping("/faultSimulation/{value}")
-    public ResponseEntity setFaultSimulation(@PathVariable Short value) throws Exception {
+    public ResponseEntity setFaultSimulation(@PathVariable Boolean value) throws Exception {
         CNC1Copy.uaClientService.writeNodeValue(CNC1CopyNodeIds.CNC1Copy_faultSimulation, value);
         return ResponseEntity.ok("");
     }
@@ -37,7 +37,7 @@ public class CNC1BackUpController {
     }
 
     @PutMapping("/StartFlag/{value}")
-    public ResponseEntity setStartFlag(@PathVariable Short value) throws Exception {
+    public ResponseEntity setStartFlag(@PathVariable Boolean value) throws Exception {
         Boolean aStatus = CNC1Copy.uaClientService.writeNodeValue(CNC1CopyNodeIds.startFlag, value);
         if (!aStatus) {
             throw new RuntimeException("opc ua写入节点信息出错");
@@ -46,7 +46,7 @@ public class CNC1BackUpController {
     }
 
     @PutMapping("/StopFlag/{value}")
-    public ResponseEntity setStopFlag(@PathVariable Short value) throws Exception {
+    public ResponseEntity setStopFlag(@PathVariable Boolean value) throws Exception {
         Boolean aStatus = CNC1Copy.uaClientService.writeNodeValue(CNC1CopyNodeIds.stopFlag, value);
         if (!aStatus) {
             throw new RuntimeException("opc ua写入节点信息出错");
@@ -55,7 +55,7 @@ public class CNC1BackUpController {
     }
 
     @PutMapping("/InitialFlag/{value}")
-    public ResponseEntity setInitialFlag(@PathVariable Short value) throws Exception {
+    public ResponseEntity setInitialFlag(@PathVariable Boolean value) throws Exception {
         Boolean aStatus = CNC1Copy.uaClientService.writeNodeValue(CNC1CopyNodeIds.initialFlag, value);
         if (!aStatus) {
             throw new RuntimeException("opc ua写入节点信息出错");

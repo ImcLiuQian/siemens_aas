@@ -2,48 +2,98 @@ package com.imc.siemens_aas.i4_0.statemachine;
 
 import com.imc.siemens_aas.aasenv.AasEnv;
 import com.imc.siemens_aas.i4_0.message.Message;
-import com.imc.siemens_aas.i4_0.message.frame.Frame;
-import com.imc.siemens_aas.i4_0.message.frame.MessageType;
-import com.imc.siemens_aas.i4_0.message.interactionElement.InteractionElement;
-import com.imc.siemens_aas.i4_0.statemachine.judge.JudgeStrategy;
-import com.imc.siemens_aas.i4_0.statemachine.judge.ParaJudge;
-import com.imc.siemens_aas.i4_0.statemachine.judge.ServiceJudge;
+import com.imc.siemens_aas.i4_0.statemachine.providerjudge.ProJdResult;
+import com.imc.siemens_aas.i4_0.statemachine.providerjudge.ProJudgeStrategy;
+import com.imc.siemens_aas.i4_0.statemachine.state.provider.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 
-public class ProviderStateMach {
 
-    private String conversationId;//状态机的会话Id
-    private int messageId;//状态机的会话次数
+/**
+ * 服务提供者状态机，使用之前需要使用init方法绑定AAS和参数评估策略
+ */
+@Controller
+@RequestMapping("aas/i4.0/provider")
+public class ProviderStateMach implements ProviderContext {
 
     private AasEnv aasEnv;
-    private JudgeStrategy judgeStrategy;
+    private ProJudgeStrategy judgeStrategy;
+    private ProJdResult result;//状态机评估是否满足调用者的需求之后，产生的结果
+    private Message resMsg;//需要返回的消息
+    private ProviderState state = ProposalWaiting.getInstance();//当前状态机的状态，初始状态为等待Proposal状态
 
-
-    public ProviderStateMach(AasEnv aasEnv, JudgeStrategy judgeStrategy) {
+    public void init(AasEnv aasEnv, ProJudgeStrategy judgeStrategy) {
         this.aasEnv = aasEnv;
         this.judgeStrategy = judgeStrategy;
     }
 
-    public Message handle(Message message) {
-        Message resMsg = new Message().initRecvFrame(message);
-        Frame resFrame = resMsg.getFrame();
-
-        String type = message.getFrame().getType();
-        if (type.equals(MessageType.CallForPro)) {
-            List<InteractionElement> interactionElements = message.getInteractionElements();
-            boolean isKnown = ParaJudge.isKnown(message);
-            if (isKnown) {
-                boolean isOk = new ServiceJudge(this.aasEnv, interactionElements).setJudgeStrategy(judgeStrategy).isOK();
-                if (isOk) {
-                    this.aasEnv.doService(interactionElements);
-                    resFrame.setType(MessageType.Offer);
-                } else {
-                    resFrame.setType(MessageType.Refusal);
-                }
-            }
+    @PostMapping("aasProposal")
+    public ResponseEntity pHandle(@RequestBody Message message) {
+        if (state != ProposalWaiting.getInstance()) {
+            return ResponseEntity.ok("service is already in use");
         }
-        resFrame.setType(MessageType.NotUnderStood);
-        return resMsg;
+        handle(message);
+        if (resMsg != null) {
+            return ResponseEntity.ok(resMsg);
+        } else {
+            return ResponseEntity.ok("");
+        }
+    }
+
+    @PostMapping("aasOfferReply")
+    public ResponseEntity oRHandle(@RequestBody Message message) {
+        if (state != OfferResWaiting.getInstance()) {
+            return ResponseEntity.ok("service is already in use");
+        }
+        handle(message);
+        if (resMsg != null) {
+            return ResponseEntity.ok(resMsg);
+        } else {
+            return ResponseEntity.ok("");
+        }
+    }
+
+    @Override
+    public void changeState(ProviderState state) {
+        this.state = state;
+    }
+
+    @Override
+    public ProviderState getState() {
+        return this.state;
+    }
+
+    @Override
+    public void handle(Message message) {
+        this.state.doExecute(this, message);
+    }
+
+    @Override
+    public void setResult(ProJdResult result) {
+        this.result = result;
+    }
+
+    @Override
+    public ProJdResult getResult() {
+        return this.result;
+    }
+
+    @Override
+    public ProJudgeStrategy getStrategy() {
+        return this.judgeStrategy;
+    }
+
+    @Override
+    public AasEnv getAasEnv() {
+        return this.aasEnv;
+    }
+
+    @Override
+    public void setResMsg(Message resMsg) {
+        this.resMsg = resMsg;
     }
 }

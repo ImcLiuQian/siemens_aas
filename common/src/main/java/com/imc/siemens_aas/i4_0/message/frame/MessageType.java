@@ -11,4 +11,6 @@ public interface MessageType {
     String Offer = "offer";
     String OfferRejection = "offer rejection";
     String OfferAcceptance = "offer acceptance";
+    String Conforming = "conforming";
+    String Error = "error";
 }

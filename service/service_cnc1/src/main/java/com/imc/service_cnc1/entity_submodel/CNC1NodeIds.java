@@ -62,7 +62,7 @@ public class CNC1NodeIds {
         CNC1_faultSimulation = new NodeId(nameSpace, "\"ServiceParameter\".\"CNC1_faultSimulation\"");
         initialFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"initialFlag\"");
         startFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"startFlag\"");
-        startFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"stopFlag\"");
+        stopFlag = new NodeId(nameSpace, "\"ServiceParameter\".\"stopFlag\"");
     }
 
 

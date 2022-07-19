@@ -5,21 +5,21 @@ import com.imc.siemens_aas.aasenv.submodel.metamodel.SemanticId;
 import com.imc.siemens_aas.aasenv.common.Description;
 import com.imc.siemens_aas.aasenv.common.ModelType;
 import com.imc.siemens_aas.aasenv.common.Identification;
-import com.imc.siemens_aas.aasenv.submodel.submodelelement.Property;
-import com.imc.siemens_aas.aasenv.submodel.submodelelement.SubmodelElement;
-import com.imc.siemens_aas.aasenv.submodel.submodelelement.SubmodelElementCollection;
+import com.imc.siemens_aas.aasenv.submodel.submodelelement.*;
 import com.imc.siemens_aas.i4_0.message.interactionElement.InteractionElement;
 import com.imc.siemens_aas.utils.TypeUtils;
 import lombok.Data;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 
 @Data
 @JsonIgnoreProperties(value = {"modelObject"})
-public class Submodel implements Cloneable{
+public class Submodel {
     private SemanticId semanticId;
     private Identification identification;
     private String idShort;
@@ -88,5 +88,37 @@ public class Submodel implements Cloneable{
      */
     public void doMethod(List<InteractionElement> interactionElements) {
 
+    }
+
+    /**
+     * 获取Submodel中所有的Operation
+     * @return
+     */
+    public HashMap<String, Operation> getOperations() {
+        HashMap<String, Operation> resOperations = new HashMap<>();
+        getOperations(resOperations, submodelElements);
+        return resOperations;
+    }
+
+    /**
+     * 将submodelElements里面所有的Operation节点全部写到resOperations里面
+     * @param resOperations
+     * @param submodelElements
+     * @return
+     */
+    private void getOperations(HashMap<String, Operation> resOperations, List<SubmodelElement> submodelElements) {
+        for (SubmodelElement submodelElement : submodelElements) {
+            String elementType = submodelElement.getModelType().getName();
+            //如果是Property，就什么也不干
+            //如果是Operation，就加入集合中
+            if (elementType.equals(ElementType.Operation)) {
+                resOperations.put(submodelElement.getIdShort(), (Operation) submodelElement);
+            }
+            //如果是SEC，就递归遍历
+            if (elementType.equals(ElementType.SEC)) {
+                List<SubmodelElement> submodelElementList = ((SubmodelElementCollection) submodelElement).getValue();
+                getOperations(resOperations, submodelElementList);
+            }
+        }
     }
 }

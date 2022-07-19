@@ -1,8 +1,13 @@
 package com.imc.siemens_aas.i4_0.message;
 
+import com.imc.siemens_aas.aasenv.AasEnv;
+import com.imc.siemens_aas.aasenv.common.Identification;
+import com.imc.siemens_aas.aasenv.common.Type.IdType;
 import com.imc.siemens_aas.i4_0.message.frame.Frame;
 import com.imc.siemens_aas.i4_0.message.frame.Receiver;
+import com.imc.siemens_aas.i4_0.message.frame.Role;
 import com.imc.siemens_aas.i4_0.message.frame.Sender;
+import com.imc.siemens_aas.i4_0.message.frame.semanticProtocol.RoleType;
 import com.imc.siemens_aas.i4_0.message.interactionElement.InteractionElement;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
@@ -14,49 +19,24 @@ public class Message {
     private Frame frame;
     private List<InteractionElement> interactionElements;
 
-//    /**
-//     * 根据aas将Message初始化
-//     * 需要额外设置：
-//     * @param aasEnv
-//     */
-//    public Message(AasEnv aasEnv) {
-//        this.frame = new Frame();
-//
-//
-//
-//        frame.setSender(aasEnv.get);
-//
-//
-//        resMsg.setFrame(frame);
-//    }
-
     /**
-     * TODO
-     */
-    private Message initSendFrame() {
-
-        //TODO
-
-        return this;
-    }
-
-    /**
-     * 对返回的消息帧头进行初始化，暂不设置frameType，messageId，
+     * 对返回的消息帧头进行初始化，暂不设置frameType
      * @param message
      * @return
      */
     public Message initRecvFrame(Message message) {
-        frame = new Frame();
+
         Frame recvFrame = message.getFrame();
-        //set Sender and Receiver
-        Sender sender = new Sender();
-        sender.setIdentification(recvFrame.getReceiver().getIdentification());
-        sender.setRole(recvFrame.getReceiver().getRole());
-        frame.setSender(sender);
-        Receiver receiver = new Receiver();
-        receiver.setIdentification(recvFrame.getSender().getIdentification());
-        receiver.setRole(recvFrame.getSender().getRole());
-        frame.setReceiver(receiver);
+
+        frame = Frame.custom()
+                .setSendIdentification(recvFrame.getReceiver().getIdentification())
+                .setSendRole(recvFrame.getReceiver().getRole())
+                .setRecvIdentification(recvFrame.getSender().getIdentification())
+                .setRecvRole(recvFrame.getSender().getRole())
+                .setConversationId(recvFrame.getConversationId())
+                .setMessageId(recvFrame.getMessageId() + 1)//TODO 这里的策略是回复的消息将messageId + 1，之后可以完善
+                .build();
+
         return this;
     }
 }
