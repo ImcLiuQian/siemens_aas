@@ -11,10 +11,7 @@ import com.imc.siemens_aas.utils.TypeUtils;
 import lombok.Data;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 @Data
@@ -84,13 +81,6 @@ public class Submodel {
     }
 
     /**
-     * 调用根据Message中的interactionElements调用modelObject中的方法
-     */
-    public void doMethod(List<InteractionElement> interactionElements) {
-
-    }
-
-    /**
      * 获取Submodel中所有的Operation
      * @return
      */
@@ -120,5 +110,18 @@ public class Submodel {
                 getOperations(resOperations, submodelElementList);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Submodel submodel = (Submodel) o;
+        return Objects.equals(semanticId, submodel.semanticId) && Objects.equals(identification, submodel.identification) && Objects.equals(idShort, submodel.idShort) && Objects.equals(category, submodel.category) && Objects.equals(modelType, submodel.modelType) && Objects.equals(submodelElements, submodel.submodelElements) && Objects.equals(kind, submodel.kind) && Objects.equals(descriptions, submodel.descriptions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(semanticId, identification, idShort, category, modelType, submodelElements, kind, descriptions);
     }
 }

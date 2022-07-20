@@ -32,7 +32,8 @@ public class ProviderStateMach implements ProviderContext {
     }
 
     @PostMapping("aasProposal")
-    public ResponseEntity pHandle(@RequestBody Message message) {
+    public ResponseEntity pHandle(@RequestBody String msgJson) {
+        Message message = Message.createByJson(msgJson);
         if (state != ProposalWaiting.getInstance()) {
             return ResponseEntity.ok("service is already in use");
         }
@@ -45,7 +46,8 @@ public class ProviderStateMach implements ProviderContext {
     }
 
     @PostMapping("aasOfferReply")
-    public ResponseEntity oRHandle(@RequestBody Message message) {
+    public ResponseEntity oRHandle(@RequestBody String msgJson) {
+        Message message = Message.createByJson(msgJson);
         if (state != OfferResWaiting.getInstance()) {
             return ResponseEntity.ok("service is already in use");
         }

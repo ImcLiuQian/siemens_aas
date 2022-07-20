@@ -10,6 +10,12 @@ import com.imc.siemens_aas.i4_0.message.interactionElement.submodel.InteractionO
 import java.util.*;
 
 public class SampleProJudgeStrategy extends ProJudgeStrategy {
+    private SampleProJudgeStrategy() {}
+    private static SampleProJudgeStrategy instance = new SampleProJudgeStrategy();
+    public static SampleProJudgeStrategy getInstance() {
+        return instance;
+    }
+
     /**
      * 找到aasEnv中的submodel中的submodelElements中的Operation类型的节点，判断其idShort是否为interactionElements中的idShort
      * 并且将InteractionElement与Submodel中的Operation对应起来，作为结构体返回，给后面的AAS调用

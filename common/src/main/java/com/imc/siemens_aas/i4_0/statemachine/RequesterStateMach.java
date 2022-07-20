@@ -40,11 +40,11 @@ public class RequesterStateMach implements RequesterContext {
 
     /**
      * 响应前端的按钮请求
-     * @param message 前端发送消息也以message的形式发送
      * @return
      */
     @PostMapping("aasProposal")
-    public ResponseEntity callForProposal(@RequestBody Message message) {
+    public ResponseEntity callForProposal(@RequestBody String msgJson) {
+        Message message = Message.createByJson(msgJson);
         if (state != CFPSendingWaiting.getInstance()) {
             return ResponseEntity.ok("service is already in use");
         }
@@ -53,13 +53,13 @@ public class RequesterStateMach implements RequesterContext {
     }
 
     @Override
-    public ProviderState getState() {
-        return null;
+    public RequesterState getState() {
+        return state;
     }
 
     @Override
     public void changeState(RequesterState state) {
-
+        this.state = state;
     }
 
     @Override

@@ -61,7 +61,7 @@ public class AasEnv {
             Object[] methodParas = new Object[inputVariable.size()];
             for (int i = 0; i < inputVariable.size(); i++) {
                 Object value = inputVariable.get(i).getValue().getSubmodelElement().getValue();
-                methodParas[i] = value;
+                    methodParas[i] = value;
             }
 
             //拿到Submodel中包装的那个JAVA类

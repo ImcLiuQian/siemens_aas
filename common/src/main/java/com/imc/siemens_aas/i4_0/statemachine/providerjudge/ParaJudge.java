@@ -15,21 +15,23 @@ public class ParaJudge {
     /**
      * 判断参数是否已知，暂时根据本地字典类型判断
      * TODO 从服务器中查找对应的是否存在对应的语义信息
+     * 这里先不管语义信息，直接return true
      * @return
      */
     public static boolean isKnown(Message message) {
-        SemanticProtocol semanticProtocol = message.getFrame().getSemanticProtocol();
-        List<Key> msgKeys = semanticProtocol.getKeys();
-        List<SemanticProtocol> semanticProtocols = SemanticProtocols.get();
-        for (Key msgKey : msgKeys) {
-            for (SemanticProtocol protocol : semanticProtocols) {
-                for (Key key : protocol.getKeys()) {
-                    if (msgKey.equals(key)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+//        SemanticProtocol semanticProtocol = message.getFrame().getSemanticProtocol();
+//        List<Key> msgKeys = semanticProtocol.getKeys();
+//        List<SemanticProtocol> semanticProtocols = SemanticProtocols.get();
+//        for (Key msgKey : msgKeys) {
+//            for (SemanticProtocol protocol : semanticProtocols) {
+//                for (Key key : protocol.getKeys()) {
+//                    if (msgKey.equals(key)) {
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+        return true;
     }
 }

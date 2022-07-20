@@ -9,8 +9,8 @@ public class AS_Service extends ModelObject {
 
     public Short AS_mode;
 
-    public static void AS_AssembleStrategy(short mode) {
-        AS.setAssembleStrategy(mode);
+    public static void AS_AssembleStrategy(Integer mode) {
+        AS.setAssembleStrategy(Short.parseShort(mode.toString()));
     }
 
     public static AS_Status AS_StatusMonitor(Boolean initialFlag, Boolean startFlag) {

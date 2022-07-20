@@ -1,16 +1,16 @@
 package com.imc.siemens_aas.i4_0.message.frame;
 
 public interface MessageType {
-    String CallForPro = "call for proposal";
+    String CallForPro = "callForProposal";
     String Proposal = "proposal";
-    String AcceptProposal = "accept proposal";
-    String RejectProposal = "reject proposal";
+    String AcceptProposal = "acceptProposal";
+    String RejectProposal = "rejectProposal";
     String Inform = "inform";
-    String NotUnderStood = "not understood";
+    String NotUnderStood = "notUnderstood";
     String Refusal = "refusal";
     String Offer = "offer";
-    String OfferRejection = "offer rejection";
-    String OfferAcceptance = "offer acceptance";
+    String OfferRejection = "offerRejection";
+    String OfferAcceptance = "offerAcceptance";
     String Conforming = "conforming";
     String Error = "error";
 }

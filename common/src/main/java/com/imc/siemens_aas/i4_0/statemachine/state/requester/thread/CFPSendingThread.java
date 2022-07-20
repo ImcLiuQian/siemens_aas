@@ -24,8 +24,8 @@ public class CFPSendingThread extends Thread{
     @Override
     public void run() {
         ObjectMapper mapper = new ObjectMapper();
-        String resMsgJson = HttpClientHelper.doPostByParam(url, mapper.writeValueAsString(msg), msg.getFrame().getReplyBy().intValue());
-        Message message = mapper.readValue(resMsgJson, Message.class);
+        String resMsgJson = HttpClientHelper.doPostByParam(url + "/aas/i4.0/provider/aasProposal", mapper.writeValueAsString(msg), /*msg.getFrame().getReplyBy().intValue()*/100000);
+        Message message = Message.createByJson(resMsgJson);
         boolean canOffer = message.getFrame().getType().equals(MessageType.Offer);
         if (canOffer) {//如果接受到的类型是offer，那么就放入context的hashMap等待进行评估
             context.addOffer(System.currentTimeMillis(), new Offer().setUrl(url).setOfferMsg(message));

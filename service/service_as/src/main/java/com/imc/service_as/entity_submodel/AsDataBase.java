@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * 用来管理 AS的factoryIO，Service和Nameplate三个子模型
  */
@@ -33,9 +35,12 @@ public class AsDataBase implements InitializingBean {
         Nameplate_Submodel = SubmodelFactory.createByFile(ASConfigProperties.NameplateFilePath);
         log.info(mapper.writeValueAsString(Nameplate_Submodel));
         Service_Submodel = SubmodelFactory.createByFile(ASConfigProperties.ServiceFilePath);
+        Service_Submodel.setModelObject(com.imc.service_as.entity_submodel.AS.getAs_service());
         log.info(mapper.writeValueAsString(Service_Submodel));
 
         AS = AasFactory.createByFile(ASConfigProperties.AsFilePath);
+        List<Submodel> submodels = AS.getSubmodels();
+        submodels.set(submodels.indexOf(Service_Submodel), Service_Submodel);
         log.info(mapper.writeValueAsString(AS));
     }
 }

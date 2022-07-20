@@ -5,7 +5,7 @@ import lombok.Data;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 
 @Data
-public class CNC1CopyNodeIds {
+public class CNC1BackUpNodeIds {
     private static Integer nameSpace;
     static {
         nameSpace = OpcUaProperties.NAMESPACE;

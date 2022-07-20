@@ -26,7 +26,7 @@ public class ASController {
     }
 
     @PutMapping("/AS_AssembleStrategy/{value}")
-    public ResponseEntity setAsMode(@PathVariable Short value) {
+    public ResponseEntity setAsMode(@PathVariable int value) {
         AS_Service.AS_AssembleStrategy(value);
         AS_Status status = AS.getStatus();
         return new ResponseEntity(status, HttpStatus.OK);

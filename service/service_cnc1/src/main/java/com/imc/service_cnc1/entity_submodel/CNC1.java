@@ -20,10 +20,12 @@ public class CNC1 implements InitializingBean{
     private OpcUaClientService clientService;
     private static CNC1_Instance_FactoryIO cnc1_instance_factoryIO;
     private static CNC1_Service cnc1_service;
+    private static CNC1InstanceFactoryIo Instance_factoryIO;
 
     static {
         cnc1_instance_factoryIO = new CNC1_Instance_FactoryIO();
         cnc1_service = new CNC1_Service();
+        Instance_factoryIO = new CNC1InstanceFactoryIo();
     }
 
     public static CNC1_Instance_FactoryIO getCnc1_instance_factoryIO() {
@@ -32,6 +34,10 @@ public class CNC1 implements InitializingBean{
 
     public static CNC1_Service getCnc1_service() {
         return cnc1_service;
+    }
+
+    public static CNC1InstanceFactoryIo getInstance_factoryIO() {
+        return Instance_factoryIO;
     }
 
     public static void readValue() {
@@ -58,6 +64,8 @@ public class CNC1 implements InitializingBean{
             rawColorTemp.setGreen((Boolean) uaClientService.readNode(CNC1NodeIds.green));
             rawColorTemp.setGrey((Boolean) uaClientService.readNode(CNC1NodeIds.grey));
             cnc1_instance_factoryIO.rawColor = rawColorTemp;
+
+            Instance_factoryIO.setCnc1(cnc1_instance_factoryIO);
 
             cnc1_service.CNC1_rawColor = (Short) uaClientService.readNode(CNC1NodeIds.CNC1_rawColor);
             cnc1_service.CNC1_type = (Boolean) uaClientService.readNode(CNC1NodeIds.CNC1_type);

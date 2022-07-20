@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.imc.siemens_aas.aasenv.submodel.submodelelement.SubmodelElement;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -60,7 +61,8 @@ public class SubmodelFactory {
             JsonNode submodelElements = rootNode.path("submodelElements");
             for (JsonNode submodelElement : submodelElements) {
                 //调用方法来操作submodelElement
-                eleJsonConvert(submodelElement);
+//                eleJsonConvert(submodelElement);
+                SubmodelElement.addTypeInJson(submodelElement);
             }
             Submodel submodel = mapper.convertValue(rootNode, Submodel.class);
             return submodel;
@@ -68,56 +70,4 @@ public class SubmodelFactory {
             throw new RuntimeException("submodelJson解析错误");
         }
     }
-
-    private static void eleJsonConvert(JsonNode submodelElement) {
-        JsonNode type = submodelElement.path("modelType").path("name");
-        //1.设置submodelElement属性
-        ((ObjectNode) submodelElement).set("type", type);
-        //2.如果是Property，那么可以什么都不用做
-        //3.如果是Operation，那么还需要设置里面的Property，也是增加一个type
-        String typeName = type.asText();
-        if (typeName.equals("Operation")) {
-            //inputVariable
-            JsonNode inputVariable = submodelElement.path("inputVariable");
-            //如果inputVariable中有数据
-            if (!inputVariable.isEmpty()) {
-                for (JsonNode jsonNode : inputVariable) {
-                    JsonNode elementNode = jsonNode.path("value").path("submodelElement");
-                    JsonNode elementType = elementNode.path("modelType").path("name");
-                    ((ObjectNode) elementNode).set("type", elementType);
-                }
-            }
-            //outputVariable
-            JsonNode outputVariable = submodelElement.path("outputVariable");
-            //如果outputVariable中有数据
-            if (!outputVariable.isEmpty()) {
-                for (JsonNode jsonNode : outputVariable) {
-                    JsonNode elementNode = jsonNode.path("value").path("submodelElement");
-                    JsonNode elementType = elementNode.path("modelType").path("name");
-                    ((ObjectNode) elementNode).set("type", elementType);
-                }
-            }
-            //inoutputVariable
-            JsonNode inoutputVariable = submodelElement.path("inoutputVariable");
-            //如果inoutputVariable中有数据
-            if (!inoutputVariable.isEmpty()) {
-                for (JsonNode jsonNode : inoutputVariable) {
-                    JsonNode elementNode = jsonNode.path("value").path("submodelElement");
-                    JsonNode elementType = elementNode.path("modelType").path("name");
-                    ((ObjectNode) elementNode).set("type", elementType);
-                }
-            }
-        }
-        //4.如果是SubmodelElementCollection，则继续向下遍历，直到其中没有SubmodelElementCollection
-        if (typeName.equals("SubmodelElementCollection")) {
-            JsonNode value = submodelElement.path("value");
-            for (JsonNode jsonNode : value) {
-                //递归调用
-                eleJsonConvert(jsonNode);
-            }
-        }
-    }
-
-    //TODO 用正则表达式把序列化时的 "type": "SubmodelElementCollection" 的这种字段去掉
-    //TODO 或者直接用JACKSON工具实现
 }

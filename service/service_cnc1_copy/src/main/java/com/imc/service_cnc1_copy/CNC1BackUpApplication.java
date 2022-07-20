@@ -6,8 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.imc"})
-public class CNC1CopyApplication {
+public class CNC1BackUpApplication {
     public static void main(String[] args) {
-        SpringApplication.run(CNC1CopyApplication.class, args);
+        SpringApplication.run(CNC1BackUpApplication.class, args);
     }
 }

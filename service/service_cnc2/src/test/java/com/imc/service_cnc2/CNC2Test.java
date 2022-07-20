@@ -32,7 +32,7 @@ public class CNC2Test {
         CNC2_Service cnc2_service = CNC2.getCnc2_service();
         System.out.println("cnc2_service = " + cnc2_service);
 
-        CNC2_Service.CNC2_ChooseProduct((short)2, true);
+//        CNC2_Service.CNC2_ChooseProduct((short)2, true);
 
         CNC2.readValue();
         cnc2_instance_factoryIO = CNC2.getCnc2_instance_factoryIO();

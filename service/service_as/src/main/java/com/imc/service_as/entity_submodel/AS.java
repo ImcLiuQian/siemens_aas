@@ -30,17 +30,14 @@ public class AS implements InitializingBean {
     }
 
     public static AS_Instance_FactoryIO getAs_instance_factoryIO() {
-//        readValue();
         return as_instance_factoryIO;
     }
 
     public static AS_Service getAs_service() {
-//        readValue();
         return as_service;
     }
 
     public static AsInstanceFactoryIo getInstance_factoryIO() {
-//        readValue();
         return Instance_factoryIO;
     }
 

@@ -31,7 +31,7 @@ public class CNC1Test {
         CNC1_Service cnc1_service = CNC1.getCnc1_service();
         System.out.println("cnc1_service = " + cnc1_service);
 
-        CNC1_Service.CNC1_ChooseProduct((short)2, true);
+//        CNC1_Service.CNC1_ChooseProduct((short)2, true);
 
         CNC1.readValue();
         cnc1_instance_factoryIO = CNC1.getCnc1_instance_factoryIO();

@@ -19,15 +19,21 @@ public class CNC2 implements InitializingBean{
     @Autowired
     private OpcUaClientService clientService;
     private static CNC2_Instance_FactoryIO cnc2_instance_factoryIO;
+    private static CNC2InstanceFactoryIo Instance_factoryIO;
     private static CNC2_Service cnc2_service;
 
     static {
         cnc2_instance_factoryIO = new CNC2_Instance_FactoryIO();
         cnc2_service = new CNC2_Service();
+        Instance_factoryIO = new CNC2InstanceFactoryIo();
     }
 
     public static CNC2_Instance_FactoryIO getCnc2_instance_factoryIO() {
         return cnc2_instance_factoryIO;
+    }
+
+    public static CNC2InstanceFactoryIo getInstance_factoryIO() {
+        return Instance_factoryIO;
     }
 
     public static CNC2_Service getCnc2_service() {
@@ -58,6 +64,8 @@ public class CNC2 implements InitializingBean{
             rawColorTemp.setGreen((Boolean) uaClientService.readNode(CNC2NodeIds.green));
             rawColorTemp.setGrey((Boolean) uaClientService.readNode(CNC2NodeIds.grey));
             cnc2_instance_factoryIO.rawColor = rawColorTemp;
+
+            Instance_factoryIO.cnc2 = cnc2_instance_factoryIO;
 
             cnc2_service.CNC2_rawColor = (Short) uaClientService.readNode(CNC2NodeIds.CNC2_rawColor);
             cnc2_service.CNC2_type = (Boolean) uaClientService.readNode(CNC2NodeIds.CNC2_type);

@@ -22,22 +22,4 @@ public class InteractionElement {
     private List<OperationVar> inputVariable;
     private String kind;
     private List<Description> descriptions;
-
-    /**
-     * 将json解析为List<InteractionElement>
-     * TODO 测试有点问题
-     * @param json
-     * @return
-     */
-//    public static List<InteractionElement> createIEListbyJson(String json) {
-//        ObjectMapper mapper = new ObjectMapper();
-//        List<InteractionElement> interactionElements;
-//        try {
-//            interactionElements = mapper.readValue(json, new TypeReference<List<InteractionElement>>() {});
-//        } catch (JsonProcessingException e) {
-//            log.error("InteractionElement json转换失败");
-//            throw new RuntimeException(e);
-//        }
-//        return interactionElements;
-//    }
 }

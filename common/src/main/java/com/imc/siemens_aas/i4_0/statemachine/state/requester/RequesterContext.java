@@ -7,7 +7,7 @@ import com.imc.siemens_aas.i4_0.statemachine.state.provider.ProviderState;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface RequesterContext {
-    ProviderState getState();
+    RequesterState getState();
     void changeState(RequesterState state);
     void handle(Message message);
     String getRicUrl();

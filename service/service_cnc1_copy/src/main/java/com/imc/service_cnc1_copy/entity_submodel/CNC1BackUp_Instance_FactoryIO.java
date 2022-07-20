@@ -6,7 +6,7 @@ import com.imc.service_cnc1_copy.entity_submodel.metacnc1_copy.RawColor;
 import lombok.Data;
 
 @Data
-public class CNC1Copy_Instance_FactoryIO {
+public class CNC1BackUp_Instance_FactoryIO {
     protected Buttons buttons;
     protected Conveyor conveyor;
     protected Short counter;

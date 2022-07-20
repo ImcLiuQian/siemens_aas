@@ -9,9 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 /**
- * 用来管理 AS的factoryIO，Service和Nameplate三个子模型
+ * 用来管理 CNC1的factoryIO，Service和Nameplate三个子模型
  */
 @Component
 @Slf4j
@@ -33,9 +35,12 @@ public class CNC1DataBase implements InitializingBean {
         Nameplate_Submodel = SubmodelFactory.createByFile(CNC1ConfigProperties.NameplateFilePath);
         log.info(mapper.writeValueAsString(Nameplate_Submodel));
         Service_Submodel = SubmodelFactory.createByFile(CNC1ConfigProperties.ServiceFilePath);
+        Service_Submodel.setModelObject(com.imc.service_cnc1.entity_submodel.CNC1.getCnc1_service());
         log.info(mapper.writeValueAsString(Service_Submodel));
 
         CNC1 = AasFactory.createByFile(CNC1ConfigProperties.CNC1FilePath);
+        List<Submodel> submodels = CNC1.getSubmodels();
+        submodels.set(submodels.indexOf(Service_Submodel), Service_Submodel);
         log.info(mapper.writeValueAsString(CNC1));
     }
 }

@@ -12,6 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * 最简的接受策略，按照消息的先后顺序来选择接受，选择第一个回复offer的aas
  */
 public class SampleReqJudgeStrategy extends ReqJudgeStrategy{
+    private SampleReqJudgeStrategy() {}
+    private static SampleReqJudgeStrategy instance = new SampleReqJudgeStrategy();
+
+    public static SampleReqJudgeStrategy getInstance() {
+        return instance;
+    }
 
     @Override
     public ConcurrentHashMap<Offer, Boolean> judge(ConcurrentHashMap<Long, Offer> offers) {

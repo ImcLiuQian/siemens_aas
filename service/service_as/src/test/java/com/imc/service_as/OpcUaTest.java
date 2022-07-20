@@ -36,7 +36,7 @@ public class OpcUaTest {
         AS_Service as_service = AS.getAs_service();
         System.out.println("as_service = " + as_service);
 
-        AS_Service.AS_AssembleStrategy((short) 1);
+//        AS_Service.AS_AssembleStrategy((short) 1);
 
         AS.readValue();
         as_instance_factoryIO = AS.getAs_instance_factoryIO();

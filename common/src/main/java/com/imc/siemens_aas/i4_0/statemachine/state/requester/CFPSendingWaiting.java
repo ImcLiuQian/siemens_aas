@@ -32,11 +32,17 @@ public class CFPSendingWaiting implements RequesterState{
                 ObjectMapper mapper = new ObjectMapper();
                 //根据AAS调用的需求，向注册中心拿到符合要求的AAS的接口
                 //TODO url接口对齐
-                String jsonUrls = HttpClientHelper.doPostByParam(context.getRicUrl() + "", mapper.writeValueAsString(msg), 5000);
+//                String jsonUrls = HttpClientHelper.doPostByParam(context.getRicUrl() + "", mapper.writeValueAsString(msg), 5000);
                 HashMap<String, String> aasUrls;
                 try {
-                    aasUrls = new ObjectMapper().readValue(jsonUrls, new TypeReference<HashMap<String, String>>() {});
-                } catch (JsonProcessingException e) {
+//                    aasUrls = new ObjectMapper().readValue(jsonUrls, new TypeReference<HashMap<String, String>>() {});
+                    //TODO 改成去找注册中心拿
+                    aasUrls = new HashMap<> ();
+                    aasUrls.put("CNC1", "http://localhost:8002");
+//                    aasUrls.put("AS", "http://localhost:8001");
+//                    aasUrls.put("CNC1BackUp", "http://localhost:8003");
+//                    aasUrls.put("CNC2", "http://localhost:8004");
+                } catch (RuntimeException e) {
                     log.error("状态机初始化失败: aas urls json解析失败");
                     throw new RuntimeException(e);
                 }
@@ -47,7 +53,7 @@ public class CFPSendingWaiting implements RequesterState{
                     //开启多个线程同步去处理
                     //因为，假设是单线程，并且有10个AAS，这里会挨个等待10个AAS的回复，而当所有的AAS都没有回答时，会等待10 × getReplyBy().intValue()的时间长度
                     //而如果是多线程，只需要等待一个getReplyBy().intValue()的长度
-                    CFPSendingThread cfpSendingThread = new CFPSendingThread(context, url + "/aas/i4.0/provider/aasProposal", msg);
+                    CFPSendingThread cfpSendingThread = new CFPSendingThread(context, url, msg);
                     cfpSendingThread.start();
                     sendThreads.add(cfpSendingThread);
                 }
@@ -60,7 +66,7 @@ public class CFPSendingWaiting implements RequesterState{
                 //join完之后，说明，所有的请求都执行完毕了，让context根据当前的state去执行下面的操作，
                 //参数为空是因为不需要message消息，评估所需的数据已经通过context.addOffer添加到context里面了
                 context.handle(null);
-            } catch (JsonProcessingException e) {
+            } catch (RuntimeException e) {
                 log.error("Message json 转换错误");
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
