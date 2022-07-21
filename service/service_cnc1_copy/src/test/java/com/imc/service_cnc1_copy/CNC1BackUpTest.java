@@ -43,7 +43,7 @@ public class CNC1BackUpTest {
         CNC1BackUp_Service cnc1BackUp_service = CNC1BackUp.getCnc1BackUp_service();
         System.out.println("cnc1BackUp_service = " + cnc1BackUp_service);
 
-        CNC1BackUp_Service.CNC1_copy_StatusMonitor(false, false, true);
+//        CNC1BackUp_Service.CNC1_copy_StatusMonitor(false, false, true);
 
         CNC1BackUp.readValue();
         cnc1BackUp_instance_factoryIO = CNC1BackUp.getCnc1BackUp_instance_factoryIO();

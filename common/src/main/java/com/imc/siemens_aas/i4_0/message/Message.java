@@ -42,6 +42,7 @@ public class Message {
                 .setRecvRole(recvFrame.getSender().getRole())
                 .setConversationId(recvFrame.getConversationId())
                 .setMessageId(recvFrame.getMessageId() + 1)//TODO 这里的策略是回复的消息将messageId + 1，之后可以完善
+                .setReplyBy(recvFrame.getReplyBy())
                 .build();
 
         return this;

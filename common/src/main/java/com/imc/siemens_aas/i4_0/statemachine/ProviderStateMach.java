@@ -5,6 +5,7 @@ import com.imc.siemens_aas.i4_0.message.Message;
 import com.imc.siemens_aas.i4_0.statemachine.providerjudge.ProJdResult;
 import com.imc.siemens_aas.i4_0.statemachine.providerjudge.ProJudgeStrategy;
 import com.imc.siemens_aas.i4_0.statemachine.state.provider.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("aas/i4.0/provider")
+@Slf4j
 public class ProviderStateMach implements ProviderContext {
 
     private AasEnv aasEnv;
@@ -62,6 +64,13 @@ public class ProviderStateMach implements ProviderContext {
     @Override
     public void changeState(ProviderState state) {
         this.state = state;
+        //为了配合前端进行状态机的可视化，这里睡眠1s来延长每个状态的时间
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        log.info("切换至{}状态", state.getClass().getSimpleName());
     }
 
     @Override

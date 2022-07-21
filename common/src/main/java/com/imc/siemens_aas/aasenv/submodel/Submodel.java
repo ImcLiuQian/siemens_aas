@@ -6,7 +6,6 @@ import com.imc.siemens_aas.aasenv.common.Description;
 import com.imc.siemens_aas.aasenv.common.ModelType;
 import com.imc.siemens_aas.aasenv.common.Identification;
 import com.imc.siemens_aas.aasenv.submodel.submodelelement.*;
-import com.imc.siemens_aas.i4_0.message.interactionElement.InteractionElement;
 import com.imc.siemens_aas.utils.TypeUtils;
 import lombok.Data;
 
@@ -84,9 +83,9 @@ public class Submodel {
      * 获取Submodel中所有的Operation
      * @return
      */
-    public HashMap<String, Operation> getOperations() {
+    public HashMap<String, Operation> operations() {
         HashMap<String, Operation> resOperations = new HashMap<>();
-        getOperations(resOperations, submodelElements);
+        operations(resOperations, submodelElements);
         return resOperations;
     }
 
@@ -96,7 +95,7 @@ public class Submodel {
      * @param submodelElements
      * @return
      */
-    private void getOperations(HashMap<String, Operation> resOperations, List<SubmodelElement> submodelElements) {
+    private void operations(HashMap<String, Operation> resOperations, List<SubmodelElement> submodelElements) {
         for (SubmodelElement submodelElement : submodelElements) {
             String elementType = submodelElement.getModelType().getName();
             //如果是Property，就什么也不干
@@ -107,7 +106,7 @@ public class Submodel {
             //如果是SEC，就递归遍历
             if (elementType.equals(ElementType.SEC)) {
                 List<SubmodelElement> submodelElementList = ((SubmodelElementCollection) submodelElement).getValue();
-                getOperations(resOperations, submodelElementList);
+                operations(resOperations, submodelElementList);
             }
         }
     }

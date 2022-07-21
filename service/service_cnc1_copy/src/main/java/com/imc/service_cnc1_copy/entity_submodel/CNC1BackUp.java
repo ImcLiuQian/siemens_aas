@@ -65,11 +65,11 @@ public class CNC1BackUp implements InitializingBean{
             rawColorTemp.setGrey((Boolean) uaClientService.readNode(CNC1BackUpNodeIds.grey));
             cnc1BackUp_instance_factoryIO.rawColor = rawColorTemp;
 
-            Instance_factoryIO.cnc1BackUp = cnc1BackUp_instance_factoryIO;
+            Instance_factoryIO.CNC1_copy = cnc1BackUp_instance_factoryIO;
 
-            cnc1BackUp_service.CNC1_copy_rawColor = (Short) uaClientService.readNode(CNC1BackUpNodeIds.CNC1Copy_rawColor);
-            cnc1BackUp_service.CNC1_copy_type = (Boolean) uaClientService.readNode(CNC1BackUpNodeIds.CNC1Copy_type);
-            cnc1BackUp_service.CNC1_copy_faultSimulation = (Boolean) uaClientService.readNode(CNC1BackUpNodeIds.CNC1Copy_faultSimulation);
+            cnc1BackUp_service.CNC1_backup_rawColor = (Short) uaClientService.readNode(CNC1BackUpNodeIds.CNC1Copy_rawColor);
+            cnc1BackUp_service.CNC1_backup_type = (Boolean) uaClientService.readNode(CNC1BackUpNodeIds.CNC1Copy_type);
+            cnc1BackUp_service.CNC1_backup_faultSimulation = (Boolean) uaClientService.readNode(CNC1BackUpNodeIds.CNC1Copy_faultSimulation);
         } catch (Exception e) {
             throw new RuntimeException("读取opcua-CNC1Copy节点信息失败");
         }

@@ -60,6 +60,13 @@ public class RequesterStateMach implements RequesterContext {
     @Override
     public void changeState(RequesterState state) {
         this.state = state;
+        //为了配合前端进行状态机的可视化，这里睡眠1s来延长每个状态的时间
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        log.info("切换至{}状态", state.getClass().getSimpleName());
     }
 
     @Override

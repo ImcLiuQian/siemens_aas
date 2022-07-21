@@ -65,7 +65,7 @@ public class CNC1 implements InitializingBean{
             rawColorTemp.setGrey((Boolean) uaClientService.readNode(CNC1NodeIds.grey));
             cnc1_instance_factoryIO.rawColor = rawColorTemp;
 
-            Instance_factoryIO.setCnc1(cnc1_instance_factoryIO);
+            Instance_factoryIO.CNC1 = cnc1_instance_factoryIO;
 
             cnc1_service.CNC1_rawColor = (Short) uaClientService.readNode(CNC1NodeIds.CNC1_rawColor);
             cnc1_service.CNC1_type = (Boolean) uaClientService.readNode(CNC1NodeIds.CNC1_type);

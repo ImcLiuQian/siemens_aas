@@ -26,7 +26,7 @@ public class OfferWaiting implements RequesterState {
         //如果一条信息都没有返回，说明没有符合条件的aas能够提供offer
         //那么直接切换到call for proposal状态即可
         if (context.getOffers().size() == 0) {
-            log.error("没有符合条件的aas能够提供offer，切换回call for Proposal状态");
+            log.warn("没有符合条件的aas能够提供offer，切换回call for Proposal状态");
             context.changeState(CFPSendingWaiting.getInstance());
         } else {//如果size不为0，说明有满足要求的aas提供offer，那么切换到评估状态进行评估
             context.changeState(OfferAssessing.getInstance());

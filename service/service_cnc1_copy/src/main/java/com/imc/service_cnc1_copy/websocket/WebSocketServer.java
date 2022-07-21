@@ -130,7 +130,7 @@ public class WebSocketServer {
      * 发送自定义消息
      */
     public static void sendInfo(String message, @PathParam("id") String id) throws IOException {
-        log.info("发送消息到:" + id + "，报文:" + message);
+//        log.info("发送消息到:" + id + "，报文:" + message);
         if (StringUtils.hasLength(id) && webSocketMap.containsKey(id)) {
             webSocketMap.get(id).sendMessage(message);
         }

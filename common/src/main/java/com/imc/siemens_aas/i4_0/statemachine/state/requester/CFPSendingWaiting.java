@@ -25,6 +25,9 @@ public class CFPSendingWaiting implements RequesterState{
 
     @Override
     public void doExecute(RequesterContext context, Message msg) {
+        //每次重新开启一次调用，就先将上一次的offers类型的HashMap清空，防止上一次调用产生的offer结果对其造成影响
+        context.getOffers().clear();
+        //根据type进行判断
         String type = msg.getFrame().getType();
         if (type.equals(MessageType.CallForPro)) {//如果前端发送过来的消息类型是CallForPro
             try {
@@ -33,14 +36,13 @@ public class CFPSendingWaiting implements RequesterState{
                 //根据AAS调用的需求，向注册中心拿到符合要求的AAS的接口
                 //TODO url接口对齐
 //                String jsonUrls = HttpClientHelper.doPostByParam(context.getRicUrl() + "", mapper.writeValueAsString(msg), 5000);
-                HashMap<String, String> aasUrls;
+                HashMap<String, String> aasUrls = null;
                 try {
 //                    aasUrls = new ObjectMapper().readValue(jsonUrls, new TypeReference<HashMap<String, String>>() {});
-                    //TODO 改成去找注册中心拿
                     aasUrls = new HashMap<> ();
-                    aasUrls.put("CNC1", "http://localhost:8002");
 //                    aasUrls.put("AS", "http://localhost:8001");
-//                    aasUrls.put("CNC1BackUp", "http://localhost:8003");
+                    aasUrls.put("CNC1", "http://localhost:8002");
+                    aasUrls.put("CNC1BackUp", "http://localhost:8003");
 //                    aasUrls.put("CNC2", "http://localhost:8004");
                 } catch (RuntimeException e) {
                     log.error("状态机初始化失败: aas urls json解析失败");

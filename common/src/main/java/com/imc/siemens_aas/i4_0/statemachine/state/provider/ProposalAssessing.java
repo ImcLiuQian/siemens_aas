@@ -25,9 +25,10 @@ public class ProposalAssessing implements ProviderState{
      */
     @Override
     public void doExecute(ProviderContext context, Message message) {
+        //根据对方AAS提供的message评估出自己需要回复的resMsg，其中主要是对能否提供能力的判断
         Message resMsg = handle(context, message);
         context.setResMsg(resMsg);
-        //状态切换
+        //根据评估出来的resMsg，进行状态切换
         String type = resMsg.getFrame().getType();
         if (type.equals(MessageType.Refusal) || type.equals(MessageType.NotUnderStood)) {//进入服务结束状态
             context.changeState(ProposalWaiting.getInstance());

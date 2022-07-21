@@ -37,7 +37,7 @@ public class SampleProJudgeStrategy extends ProJudgeStrategy {
         int fitCount = 0;//用来记录满足interactionElements条件的个数，如果等于InteractionElement的个数，就返回true
 
         //拿到aasEnv中所有的Submodel与对应的Operation节点进行判断
-        HashMap<Submodel, HashMap<String, Operation>> submodelOperationMap = aasEnv.getOperations();
+        HashMap<Submodel, HashMap<String, Operation>> submodelOperationMap = aasEnv.operations();
 
         //遍历interactions，对比其中的key，即idShort
         Set<Map.Entry<String, InteractionElement>> interactionSet = interactions.entrySet();

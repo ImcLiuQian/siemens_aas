@@ -39,20 +39,21 @@ public class OfferAssessing implements RequesterState {
 
             try {
                 if (isSelected) {//如果是true，说明选择接受此Offer
+                    offerMsg.initRecvFrame(offerMsg);//将offerMsg的sender信息与receiver信息互换
                     offerMsg.getFrame().setType(MessageType.OfferAcceptance);
                     //切换至等待服务完成状态
                     context.changeState(CompletedWaiting.getInstance());
                     //发送消息
                     String responseMsgJson = HttpClientHelper.doPostByParam(offer.getUrl() + "/aas/i4.0/provider/aasOfferReply",
                             mapper.writeValueAsString(offerMsg),
-                            /*offerMsg.getFrame().getReplyBy().intValue()*/100000);
+                            offerMsg.getFrame().getReplyBy().intValue());
                     offerResponseMsg = Message.createByJson(responseMsgJson);
                 } else {//如果是false，说明选择不接受此Offer
                     offerMsg.getFrame().setType(MessageType.OfferRejection);
                     //发送消息，如果是OfferRejection，不需要对方回消息
-                    HttpClientHelper.doPostByParam(offer.getUrl() + "/aasOfferReply",
+                    HttpClientHelper.doPostByParam(offer.getUrl() + "/aas/i4.0/provider/aasOfferReply",
                             mapper.writeValueAsString(offerMsg),
-                            /*offerMsg.getFrame().getReplyBy().intValue()*/100000);
+                            offerMsg.getFrame().getReplyBy().intValue());
                 }
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);

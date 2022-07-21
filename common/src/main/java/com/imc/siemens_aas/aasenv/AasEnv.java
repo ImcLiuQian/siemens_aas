@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -80,13 +79,12 @@ public class AasEnv {
 
     /**
      * 获取AAS中所有的Operation
-     *
      * @return
      */
-    public HashMap<Submodel, HashMap<String, Operation>> getOperations() {
+    public HashMap<Submodel, HashMap<String, Operation>> operations() {
         HashMap<Submodel, HashMap<String, Operation>> res = new HashMap<>();
         for (Submodel submodel : submodels) {
-            HashMap<String, Operation> operations = submodel.getOperations();
+            HashMap<String, Operation> operations = submodel.operations();
             if (operations.size() > 0) {//表明Submodel里面有Operation节点
                 res.put(submodel, operations);
             }

@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class CNC1InstanceFactoryIo extends ModelObject {
-    protected CNC1_Instance_FactoryIO cnc1;
+    protected CNC1_Instance_FactoryIO CNC1;
 }

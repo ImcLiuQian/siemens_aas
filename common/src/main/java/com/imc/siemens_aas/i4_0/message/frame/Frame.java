@@ -90,6 +90,10 @@ public class Frame {
                 receiver.setRole(recvRole);
             }
 
+            if (replyBy == null) {
+                replyBy = 1000000L;
+            }
+
             return new Frame(type, sender, receiver, conversationId, messageId, replyBy, semanticProtocol);
         }
     }

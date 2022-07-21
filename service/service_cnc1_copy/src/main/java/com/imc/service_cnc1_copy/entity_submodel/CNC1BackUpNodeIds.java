@@ -30,22 +30,22 @@ public class CNC1BackUpNodeIds {
     protected static NodeId grey;
     //初始化
     static {
-        emergencyStop = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"buttons\".\"emergencyStop\"");
-        reset = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"buttons\".\"reset\"");
-        start = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"buttons\".\"start\"");
-        stop = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"buttons\".\"stop\"");
-        entryConveyorSpeed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"conveyor\".\"entryConveyorSpeed\"");
-        exitConveyor1_Speed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"conveyor\".\"exitConveyor1_Speed\"");
-        exitConveyor2_Speed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"conveyor\".\"exitConveyor2_Speed\"");
-        exitConveyor3_Speed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"conveyor\".\"exitConveyor3_Speed\"");
-        counter = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"counter\"");
-        entrySensor = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"entrySensor\"");
-        error = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"error\"");
-        exitSensor = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"exitSensor\"");
-        productType = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"productType\"");
-        blue = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"rawColor\".\"blue\"");
-        green = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"rawColor\".\"green\"");
-        grey = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_copy\".\"rawColor\".\"grey\"");
+        emergencyStop = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"buttons\".\"emergencyStop\"");
+        reset = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"buttons\".\"reset\"");
+        start = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"buttons\".\"start\"");
+        stop = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"buttons\".\"stop\"");
+        entryConveyorSpeed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"conveyor\".\"entryConveyorSpeed\"");
+        exitConveyor1_Speed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"conveyor\".\"exitConveyor1_Speed\"");
+        exitConveyor2_Speed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"conveyor\".\"exitConveyor2_Speed\"");
+        exitConveyor3_Speed = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"conveyor\".\"exitConveyor3_Speed\"");
+        counter = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"counter\"");
+        entrySensor = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"entrySensor\"");
+        error = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"error\"");
+        exitSensor = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"exitSensor\"");
+        productType = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"productType\"");
+        blue = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"rawColor\".\"blue\"");
+        green = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"rawColor\".\"green\"");
+        grey = new NodeId(nameSpace, "\"Instance_factoryIO\".\"CNC1_backup\".\"rawColor\".\"grey\"");
     }
 
     public static NodeId CNC1Copy_rawColor;
