@@ -40,10 +40,10 @@ public class CFPSendingWaiting implements RequesterState{
                 try {
 //                    aasUrls = new ObjectMapper().readValue(jsonUrls, new TypeReference<HashMap<String, String>>() {});
                     aasUrls = new HashMap<> ();
-//                    aasUrls.put("AS", "http://localhost:8001");
+                    aasUrls.put("AS", "http://localhost:8001");
                     aasUrls.put("CNC1", "http://localhost:8002");
                     aasUrls.put("CNC1BackUp", "http://localhost:8003");
-//                    aasUrls.put("CNC2", "http://localhost:8004");
+                    aasUrls.put("CNC2", "http://localhost:8004");
                 } catch (RuntimeException e) {
                     log.error("状态机初始化失败: aas urls json解析失败");
                     throw new RuntimeException(e);

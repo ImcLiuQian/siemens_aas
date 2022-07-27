@@ -13,6 +13,7 @@ public class CNC1_Service extends ModelObject {
 
     public static void CNC1_ChooseProduct(Integer color, Boolean type) {
         CNC1.setProduct(Short.parseShort(color.toString()), type);
+        //TODO 循环检测有没有达到订单的
     }
 
     public static CNC1_Status CNC1_StatusMonitor(Boolean initialFlag, Boolean startFlag, Boolean faultSimulation) {

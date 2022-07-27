@@ -4,6 +4,7 @@ import com.imc.siemens_aas.i4_0.message.Message;
 import com.imc.siemens_aas.i4_0.statemachine.requesterjudge.ReqJudgeStrategy;
 import com.imc.siemens_aas.i4_0.statemachine.state.provider.ProviderState;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface RequesterContext {
@@ -14,4 +15,6 @@ public interface RequesterContext {
     ReqJudgeStrategy getStrategy();
     ConcurrentHashMap<Long, Offer> getOffers();
     void addOffer(Long time, Offer offer);
+    List<Message> getLastMsgs();
+    List<String> getErrAasIds();
 }

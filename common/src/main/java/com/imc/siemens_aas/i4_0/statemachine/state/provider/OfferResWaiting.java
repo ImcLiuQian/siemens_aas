@@ -18,6 +18,9 @@ public class OfferResWaiting implements ProviderState{
     public void doExecute(ProviderContext context, Message msg) {
         String type = msg.getFrame().getType();
         if (type.equals(MessageType.OfferAcceptance)) {//如果是OfferAcceptance服务接收消息，那么就直接调用aas的方法
+            //把调用方的url设置到url中
+            context.setReqUrl(msg.getFrame().getSender().getIdentification().getId());
+            //切换状态，处理请求
             context.changeState(ServiceDoing.getInstance());
             context.handle(msg);
         } else if (type.equals(MessageType.OfferRejection)) {//如果是OfferRejection，就什么也不用做，切换回ProposalAssessing状态等待下一条I4.0消息

@@ -27,11 +27,14 @@ public class CFPSendingThread extends Thread{
         String resMsgJson = HttpClientHelper.doPostByParam(url + "/aas/i4.0/provider/aasProposal",
                 mapper.writeValueAsString(msg),
                 msg.getFrame().getReplyBy().intValue());
-        Message message = Message.createByJson(resMsgJson);
-        boolean canOffer = message.getFrame().getType().equals(MessageType.Offer);
-        if (canOffer) {//如果接受到的类型是offer，那么就放入context的hashMap等待进行评估
-            context.addOffer(System.currentTimeMillis(), new Offer().setUrl(url).setOfferMsg(message));
+        if (resMsgJson != null && !resMsgJson.equals("") && !resMsgJson.equals("service is already in use")) {
+            Message message = Message.createByJson(resMsgJson);
+            boolean canOffer = message.getFrame().getType().equals(MessageType.Offer);
+            if (canOffer) {//如果接受到的类型是offer，那么就放入context的hashMap等待进行评估
+                context.addOffer(System.currentTimeMillis(), new Offer().setUrl(url).setOfferMsg(message));
+            }
+            //如果不是offer类型，就什么也不干
         }
-        //如果不是offer类型，就什么也不干
+        //如果resMsgJson为空，说明通信建立失败，就什么也不干
     }
 }

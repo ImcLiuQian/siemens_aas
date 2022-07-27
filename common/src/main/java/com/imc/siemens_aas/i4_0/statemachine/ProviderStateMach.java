@@ -5,8 +5,10 @@ import com.imc.siemens_aas.i4_0.message.Message;
 import com.imc.siemens_aas.i4_0.statemachine.providerjudge.ProJdResult;
 import com.imc.siemens_aas.i4_0.statemachine.providerjudge.ProJudgeStrategy;
 import com.imc.siemens_aas.i4_0.statemachine.state.provider.*;
+import com.imc.siemens_aas.i4_0.statemachine.state.provider.Error;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,8 @@ public class ProviderStateMach implements ProviderContext {
     private ProJdResult result;//状态机评估是否满足调用者的需求之后，产生的结果
     private Message resMsg;//需要返回的消息
     private ProviderState state = ProposalWaiting.getInstance();//当前状态机的状态，初始状态为等待Proposal状态
+    private Boolean errOccur = false;//是否有错误出现
+    private String requesterUrl = "";//调用方的url，
 
     public void init(AasEnv aasEnv, ProJudgeStrategy judgeStrategy) {
         this.aasEnv = aasEnv;
@@ -61,15 +65,28 @@ public class ProviderStateMach implements ProviderContext {
         }
     }
 
+    /**
+     * 每100ms执行一次，查看errOccur的状态，如果errOccur为true，那么就切换到Error状态，进行错误报告
+     */
+    @Scheduled(fixedRate = 100)
+    public void errorChecker() {
+        if (errOccur) {
+            changeState(Error.getInstance());
+            handle(null);
+            //只捕捉上升沿信号，因此errOccur之后将其值为false，防止多次进入此if内部
+            errOccur = false;
+        }
+    }
+
     @Override
     public void changeState(ProviderState state) {
-        this.state = state;
         //为了配合前端进行状态机的可视化，这里睡眠1s来延长每个状态的时间
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        this.state = state;
         log.info("切换至{}状态", state.getClass().getSimpleName());
     }
 
@@ -106,5 +123,25 @@ public class ProviderStateMach implements ProviderContext {
     @Override
     public void setResMsg(Message resMsg) {
         this.resMsg = resMsg;
+    }
+
+    @Override
+    public void setErrOccur(Boolean errOccur) {
+        this.errOccur = errOccur;
+    }
+
+    @Override
+    public Boolean getErrOccur() {
+        return errOccur;
+    }
+
+    @Override
+    public String getReqUrl() {
+        return requesterUrl;
+    }
+
+    @Override
+    public void setReqUrl(String reqUrl) {
+        this.requesterUrl = reqUrl;
     }
 }

@@ -1,6 +1,7 @@
 package com.imc.siemens_aas.aasenv.factory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,12 +48,12 @@ public class AasFactory {
 
             JsonNode aasJsonNode = rootNode.path("assetAdministrationShells");
             List<AssetAdministrationShell> assetAdministrationShells =
-                    mapper.convertValue(aasJsonNode, List.class);
+                    mapper.convertValue(aasJsonNode, new TypeReference<List<AssetAdministrationShell>>() {});
             aasEnv.setAssetAdministrationShells(assetAdministrationShells);
 
             JsonNode aasetNode = rootNode.path("assets");
             List<Asset> assets =
-                    mapper.convertValue(aasetNode, List.class);
+                    mapper.convertValue(aasetNode, new TypeReference<List<Asset>>() {});
             aasEnv.setAssets(assets);
 
             List<Submodel> submodels = new LinkedList<>();
@@ -66,7 +67,7 @@ public class AasFactory {
 
             JsonNode conDesNode = rootNode.path("conceptDescriptions");
             List<ConceptDescription> conceptDescriptions =
-                    mapper.convertValue(conDesNode, List.class);
+                    mapper.convertValue(conDesNode, new TypeReference<List<ConceptDescription>>() {});
             aasEnv.setConceptDescriptions(conceptDescriptions);
         } catch (JsonProcessingException e) {
             log.error("aasEnv Json 转换失败");

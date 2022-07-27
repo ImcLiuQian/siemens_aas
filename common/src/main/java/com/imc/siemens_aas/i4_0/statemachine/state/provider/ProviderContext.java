@@ -14,4 +14,8 @@ public interface ProviderContext {
     ProJudgeStrategy getStrategy();
     AasEnv getAasEnv();
     void setResMsg(Message resMsg);
+    void setErrOccur(Boolean errOccur);
+    Boolean getErrOccur();
+    String getReqUrl();
+    void setReqUrl(String reqUrl);
 }
